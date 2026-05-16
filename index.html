@@ -1,0 +1,484 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>FakeOut Investor Deck</title>
+<meta name="description" content="Mobile-friendly investor deck for FakeOut as a digital trust platform." />
+<style>
+:root{
+  color-scheme:light;
+  --bg:#f7f7f2;
+  --ink:#101114;
+  --muted:#5d646f;
+  --line:#d8d6cc;
+  --line-dark:#25262a;
+  --panel:#ffffff;
+  --soft:#ecebe4;
+  --green:#0b6b58;
+  --blue:#255c99;
+  --red:#c44536;
+  --yellow:#d89a1c;
+  --pad:clamp(1rem,4.2vw,4.5rem);
+  --gap:clamp(.75rem,1.8vw,1.35rem);
+  --title:clamp(2.45rem,7vw,6rem);
+  --h2:clamp(2.05rem,5.2vw,4.45rem);
+  --h3:clamp(1rem,1.8vw,1.35rem);
+  --body:clamp(.95rem,1.3vw,1.15rem);
+  --small:clamp(.72rem,.95vw,.88rem);
+}
+*{box-sizing:border-box;min-width:0}
+html,body{margin:0;width:100%;min-height:100%;overflow-x:hidden;background:var(--bg);color:var(--ink);font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif}
+html{scroll-snap-type:y mandatory;scroll-behavior:smooth}
+body{border-top:5px solid var(--ink)}
+a{color:inherit}
+.progress{position:fixed;top:0;left:0;z-index:60;height:5px;width:0;background:var(--green)}
+.deck-label{position:fixed;top:18px;left:18px;z-index:50;display:flex;gap:.55rem;align-items:center;background:rgba(247,247,242,.9);border:1px solid var(--line);border-radius:999px;padding:.5rem .75rem;font-size:var(--small);font-weight:800;color:var(--ink);backdrop-filter:blur(10px)}
+.deck-label span{width:.55rem;height:.55rem;background:var(--green);border-radius:50%}
+.nav-dots{position:fixed;right:18px;top:50%;transform:translateY(-50%);z-index:50;display:grid;gap:.55rem}
+.nav-dots button{width:.72rem;height:.72rem;border:1px solid #7d817b;border-radius:50%;background:transparent;padding:0;cursor:pointer}
+.nav-dots button.active{background:var(--ink);border-color:var(--ink)}
+.controls{position:fixed;right:16px;bottom:16px;z-index:50;display:flex;gap:.5rem}
+.controls button{width:42px;height:42px;border:1px solid var(--ink);border-radius:50%;background:rgba(247,247,242,.88);color:var(--ink);font-size:1.35rem;font-weight:850;cursor:pointer}
+.slide{position:relative;width:100vw;height:100vh;height:100dvh;scroll-snap-align:start;overflow:hidden;display:flex;flex-direction:column}
+.slide:before{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(90deg,rgba(16,17,20,.045) 1px,transparent 1px);background-size:25vw 100%}
+.slide-content{position:relative;z-index:1;flex:1;display:flex;flex-direction:column;justify-content:center;padding:var(--pad);max-height:100%;overflow:hidden}
+.slide-number{position:absolute;left:var(--pad);bottom:clamp(.8rem,1.8vw,1.3rem);font-size:var(--small);font-weight:800;color:var(--muted)}
+.kicker{font-size:var(--small);font-weight:900;text-transform:uppercase;letter-spacing:.12em;color:var(--green)}
+h1,h2,h3,p{margin:0}
+h1{font-size:var(--title);line-height:.93;letter-spacing:-.055em;max-width:1050px;overflow-wrap:break-word}
+h2{font-size:var(--h2);line-height:.96;letter-spacing:-.05em;max-width:980px;overflow-wrap:break-word}
+h3{font-size:var(--h3);line-height:1.08;letter-spacing:-.018em}
+.lead{font-size:clamp(1.08rem,2vw,1.6rem);line-height:1.32;color:#343941;max-width:760px}
+.muted{color:var(--muted)}
+.grid{display:grid;gap:var(--gap)}
+.two{grid-template-columns:1.05fr .95fr;align-items:center}
+.three{grid-template-columns:repeat(3,1fr)}
+.four{grid-template-columns:repeat(4,1fr)}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:clamp(1rem,2vw,1.45rem)}
+.card p,.card li{font-size:var(--body);line-height:1.38;color:#353a42}
+.card ul{margin:.75rem 0 0;padding-left:1rem;display:grid;gap:.42rem}
+.rule{height:1px;background:var(--line-dark);margin:1.1rem 0}
+.badge-row{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:1.35rem}
+.badge{border:1px solid var(--line-dark);border-radius:999px;padding:.5rem .68rem;font-size:var(--small);font-weight:800;background:var(--bg)}
+.evidence-strip{border-left:6px solid var(--green);background:var(--panel);padding:1.1rem;border-radius:0 8px 8px 0;display:grid;gap:.75rem}
+.evidence-row{display:grid;grid-template-columns:auto 1fr;gap:1rem;align-items:start}
+.evidence-row strong{font-size:clamp(1.65rem,3.8vw,3.4rem);line-height:.9;letter-spacing:-.055em}
+.evidence-row p{font-size:var(--body);line-height:1.35;color:#343941}
+.split{display:grid;grid-template-columns:1fr 1fr;gap:var(--gap)}
+.panel-title{font-size:var(--small);text-transform:uppercase;letter-spacing:.12em;font-weight:900;color:var(--muted);margin-bottom:.75rem}
+.today{border-top:5px solid var(--red)}
+.pivot{border-top:5px solid var(--green)}
+.metric{font-size:clamp(2.45rem,5.2vw,4.6rem);line-height:.88;font-weight:950;letter-spacing:-.065em}
+.green{color:var(--green)}.blue{color:var(--blue)}.red{color:var(--red)}.yellow{color:var(--yellow)}
+.stat-note{margin-top:.7rem;font-size:var(--body);color:#343941}
+.source{font-size:var(--small);color:var(--muted);margin-top:.45rem}
+.product-flow{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border:1px solid var(--line-dark);background:var(--panel)}
+.flow-step{padding:clamp(1rem,2vw,1.5rem);border-right:1px solid var(--line)}
+.flow-step:last-child{border-right:0}
+.flow-step:before{content:attr(data-step);display:block;font-size:var(--small);font-weight:950;color:var(--green);margin-bottom:1.2rem}
+.flow-step p{font-size:var(--body);line-height:1.36;color:#343941;margin-top:.45rem}
+.matrix{display:grid;grid-template-columns:1fr 1fr;gap:var(--gap)}
+.matrix .card{min-height:170px}
+.revenue{display:grid;grid-template-columns:repeat(4,1fr);gap:var(--gap)}
+.revenue .card{border-top:5px solid var(--blue)}
+.callout{background:var(--ink);color:#fff;border-radius:8px;padding:clamp(1rem,2vw,1.4rem);max-width:760px}
+.callout p{color:#f3f4f6;font-size:var(--body);line-height:1.36}
+.final-box{background:var(--panel);border:1px solid var(--line-dark);border-radius:8px;padding:clamp(1.2rem,3vw,2.4rem)}
+.quote{font-size:clamp(2rem,5vw,4.4rem);line-height:.98;letter-spacing:-.05em;font-weight:950;max-width:1000px}
+.reveal{opacity:0;transform:translateY(18px);transition:opacity .45s ease,transform .45s ease}
+.visible .reveal,.slide:first-of-type .reveal{opacity:1;transform:none}
+.visible .reveal:nth-child(2){transition-delay:.05s}
+.visible .reveal:nth-child(3){transition-delay:.1s}
+.visible .reveal:nth-child(4){transition-delay:.15s}
+@media(max-width:900px){
+  .two,.three,.four,.split,.matrix,.revenue{grid-template-columns:1fr}
+  .product-flow{grid-template-columns:1fr}
+  .flow-step{border-right:0;border-bottom:1px solid var(--line)}
+  .flow-step:last-child{border-bottom:0}
+  .nav-dots{display:none}
+  .slide-content{justify-content:flex-start;padding-top:clamp(4.8rem,11vh,6.3rem);overflow-y:auto}
+  .card{padding:1rem}
+  .matrix .card{min-height:auto}
+}
+@media(max-width:560px){
+  :root{--pad:1rem;--title:clamp(1.9rem,9.3vw,2.85rem);--h2:clamp(1.5rem,7.7vw,2.3rem);--body:.84rem;--gap:.54rem}
+  h1{line-height:1}
+  h2{line-height:1.03}
+  .deck-label{top:14px;left:12px;max-width:calc(100vw - 96px);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .controls{right:10px;bottom:10px}
+  .controls button{width:38px;height:38px}
+  .slide-content{padding-top:4.55rem}
+  .slide-number{display:none}
+  .card{padding:.78rem}
+  .card ul{margin-top:.5rem;gap:.25rem}
+  .lead{font-size:1rem;line-height:1.25}
+  h3{font-size:1rem}
+  .flow-step{padding:.78rem}
+  .flow-step:before{margin-bottom:.55rem}
+  .callout{padding:.8rem}
+  .slide:first-of-type .badge-row{display:none}
+  .evidence-strip{gap:.5rem;padding:.8rem;border-left-width:4px}
+  .evidence-row{grid-template-columns:1fr;gap:.3rem}
+  .evidence-row strong{font-size:1.55rem}
+  .evidence-row p{font-size:.84rem}
+  .metric{font-size:clamp(2.6rem,15vw,4.2rem)}
+  .badge-row{gap:.4rem}
+}
+@media(max-height:650px){
+  :root{--title:clamp(2rem,6.2vw,4.1rem);--h2:clamp(1.65rem,4.8vw,3.1rem);--body:.88rem}
+  .slide-content{padding-top:3.9rem}
+  .card ul{gap:.25rem}
+}
+@media(prefers-reduced-motion:reduce){
+  *,*:before,*:after{animation:none!important;transition-duration:.01ms!important;scroll-behavior:auto!important}
+}
+</style>
+</head>
+<body>
+<div class="progress" id="progress"></div>
+<div class="deck-label"><span></span>FakeOut investor deck</div>
+<nav class="nav-dots" id="navDots" aria-label="Slide navigation"></nav>
+<div class="controls" aria-label="Slide controls">
+  <button type="button" id="prevBtn" aria-label="Previous slide">&#8249;</button>
+  <button type="button" id="nextBtn" aria-label="Next slide">&#8250;</button>
+</div>
+
+<!-- SLIDE 01: COVER -->
+<section class="slide">
+  <div class="slide-content two">
+    <div class="grid">
+      <div class="kicker reveal">Digital trust platform</div>
+      <h1 class="reveal">FakeOut helps people decide what to trust online.</h1>
+      <p class="lead reveal">A detection app with real traction, expanding into a practical safety platform for scams, misinformation, and AI-generated media.</p>
+      <div class="badge-row reveal">
+        <span class="badge">Awareness hub</span>
+        <span class="badge">Trust Assistant</span>
+        <span class="badge">Detection tools</span>
+      </div>
+    </div>
+    <div class="evidence-strip reveal">
+      <div class="evidence-row"><strong class="green">16K+</strong><p>App downloads across 40+ countries, showing real consumer demand.</p></div>
+      <div class="evidence-row"><strong class="red">$12.5B</strong><p>US consumers reported fraud losses in 2024, rising to $15.9B in 2025.</p></div>
+      <div class="evidence-row"><strong class="blue">52K+</strong><p>AI-assisted checks already performed inside the app.</p></div>
+      <div class="evidence-row"><strong class="yellow">27%</strong><p>Year-on-year growth in reported fraud losses. AI is making deception faster and cheaper.</p></div>
+    </div>
+  </div>
+  <div class="slide-number">01 / 11</div>
+</section>
+
+<!-- SLIDE 02: PIVOT -->
+<section class="slide">
+  <div class="slide-content">
+    <div class="grid">
+      <div class="kicker reveal">The evolution</div>
+      <h2 class="reveal">Move from a tool people use sometimes to a brand they trust regularly.</h2>
+      <div class="split reveal">
+        <div class="card today">
+          <div class="panel-title">Validated starting point</div>
+          <h3>Detection app</h3>
+          <ul>
+            <li>16K+ downloads, 649 monthly active users</li>
+            <li>52K+ AI checks run across 40+ countries</li>
+            <li>AI image and video detection</li>
+            <li>Claim and fake-news checks</li>
+          </ul>
+        </div>
+        <div class="card pivot">
+          <div class="panel-title">Next</div>
+          <h3>Digital safety platform</h3>
+          <ul>
+            <li>Awareness content that brings people back</li>
+            <li>Trust Assistant for everyday checks</li>
+            <li>Consumer first, education and B2B later</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="slide-number">02 / 11</div>
+</section>
+
+<!-- SLIDE 03: WHY NOW -->
+<section class="slide">
+  <div class="slide-content">
+    <div class="grid">
+      <div class="kicker reveal">Why now</div>
+      <h2 class="reveal">The trust gap is widening, fast.</h2>
+      <div class="three reveal">
+        <div class="card">
+          <div class="metric red">$15.9B</div>
+          <p class="stat-note">US consumer fraud losses reported in 2025, up from $12.5B in 2024. The problem is accelerating.</p>
+          <p class="source">FTC / Statista, 2025</p>
+        </div>
+        <div class="card">
+          <div class="metric blue">59%</div>
+          <p class="stat-note">People worried about telling real from fake news online. Trust in information is collapsing across demographics.</p>
+          <p class="source">Reuters Institute, 2024</p>
+        </div>
+        <div class="card">
+          <div class="metric green">500M</div>
+          <p class="stat-note">AI images generated every day. Synthetic media is now the default weapon in fraud and manipulation campaigns.</p>
+          <p class="source">Everypixel Journal, 2023</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="slide-number">03 / 11</div>
+</section>
+
+<!-- SLIDE 04: TRACTION (NEW) -->
+<section class="slide">
+  <div class="slide-content">
+    <div class="grid">
+      <div class="kicker reveal">Traction</div>
+      <h2 class="reveal">Real usage. Real growth. Real signal.</h2>
+      <div class="three reveal">
+        <div class="card">
+          <div class="metric green">16K+</div>
+          <p class="stat-note">Cumulative downloads across 40+ countries.</p>
+        </div>
+        <div class="card">
+          <div class="metric blue">649</div>
+          <p class="stat-note">Monthly active users. New installs growing at +8% per month.</p>
+        </div>
+        <div class="card">
+          <div class="metric red">52K+</div>
+          <p class="stat-note">AI-assisted checks performed inside the app to date.</p>
+        </div>
+      </div>
+      <div class="three reveal">
+        <div class="card">
+          <div class="metric green">2,500+</div>
+          <p class="stat-note">Image scans completed. Visual media detection is the core use case.</p>
+        </div>
+        <div class="card">
+          <div class="metric blue">508</div>
+          <p class="stat-note">New installs per month and growing. Organic, no paid acquisition yet.</p>
+        </div>
+        <div class="card">
+          <div class="metric">100%</div>
+          <p class="stat-note">Crash-free sessions. Average engagement: 1m 57s per session.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="slide-number">04 / 11</div>
+</section>
+
+<!-- SLIDE 05: MARKET GAP -->
+<section class="slide">
+  <div class="slide-content two">
+    <div class="grid">
+      <div class="kicker reveal">Market gap</div>
+      <h2 class="reveal">The missing piece is guidance at the moment of doubt.</h2>
+      <p class="lead reveal">Every existing tool solves one piece. FakeOut combines signals and tells users what to do next.</p>
+    </div>
+    <div class="matrix reveal">
+      <div class="card"><h3>Fact-checkers (Snopes, PolitiFact)</h3><p>Useful for public claims, weaker for private forwards, screenshots, and real-time messages.</p></div>
+      <div class="card"><h3>Scam blockers (Guardio, Norton Safe Web)</h3><p>Good for known spam and malicious URLs, weaker for ambiguous links and social messages.</p></div>
+      <div class="card"><h3>Deepfake tools (Reality Defender, Hive)</h3><p>Often narrow, technically demanding, or priced for enterprise buyers, not everyday users.</p></div>
+      <div class="card"><h3>FakeOut opening</h3><p>One workflow for content, context, risk, and next action, designed for the person who just got a suspicious WhatsApp forward.</p></div>
+    </div>
+  </div>
+  <div class="slide-number">05 / 11</div>
+</section>
+
+<!-- SLIDE 06: PRODUCT -->
+<section class="slide">
+  <div class="slide-content">
+    <div class="grid">
+      <div class="kicker reveal">Core product</div>
+      <h2 class="reveal">The Trust Assistant makes the platform useful.</h2>
+      <div class="product-flow reveal">
+        <div class="flow-step" data-step="01"><h3>Accept anything</h3><p>Text, URL, screenshot, image, video, claim, or social post. Built and live today.</p></div>
+        <div class="flow-step" data-step="02"><h3>Read signals</h3><p>Scam patterns, media checks, source quality, claim context, and link risk. Live today.</p></div>
+        <div class="flow-step" data-step="03"><h3>Explain risk</h3><p>Safe, suspicious, high risk, or unclear, with evidence. No binary verdicts. Live today.</p></div>
+        <div class="flow-step" data-step="04"><h3>Give action</h3><p>Verify officially, avoid payment, report, save evidence, or ask someone. Expanding next.</p></div>
+      </div>
+      <div class="callout reveal"><p>52K+ checks performed and 2,500+ image scans completed. The core detection loop is proven. The platform layer is next.</p></div>
+    </div>
+  </div>
+  <div class="slide-number">06 / 11</div>
+</section>
+
+<!-- SLIDE 07: GROWTH PATH -->
+<section class="slide">
+  <div class="slide-content">
+    <div class="grid">
+      <div class="kicker reveal">Growth path</div>
+      <h2 class="reveal">Build credibility before selling advanced tools.</h2>
+      <div class="product-flow reveal">
+        <div class="flow-step" data-step="01"><h3>Awareness</h3><p>Scam alerts, explainers, examples, and safety tips.</p></div>
+        <div class="flow-step" data-step="02"><h3>Free checks</h3><p>Let users try the Trust Assistant with everyday doubts.</p></div>
+        <div class="flow-step" data-step="03"><h3>Education</h3><p>Workshops, class packs, and institutional access.</p></div>
+        <div class="flow-step" data-step="04"><h3>B2B</h3><p>Bulk checks, monitoring, reports, and API access.</p></div>
+      </div>
+      <div class="callout reveal"><p>Near-term milestone: 1,000 monthly active users and a live Trust Assistant beta by Q3 2026. Currently at 649 MAU, growing 8% month over month.</p></div>
+    </div>
+  </div>
+  <div class="slide-number">07 / 11</div>
+</section>
+
+<!-- SLIDE 08: REVENUE -->
+<section class="slide">
+  <div class="slide-content">
+    <div class="grid">
+      <div class="kicker reveal">Revenue</div>
+      <h2 class="reveal">Free content brings attention. Paid checks create revenue.</h2>
+      <div class="revenue reveal">
+        <div class="card"><h3>Free tier</h3><p>Limited AI checks and scam alerts. Enough to build the habit and show value before asking for payment.</p></div>
+        <div class="card"><h3>Starter Pack</h3><p>One-time check bundle for occasional users. Live in the app today.</p></div>
+        <div class="card"><h3>Pro Monthly</h3><p>Unlimited AI checks, deepfake scans, history, and priority access. Active subscription tier today.</p></div>
+        <div class="card"><h3>Power Pack + B2B</h3><p>Expanded one-time bundle live now. School packs, bulk verification, and API access next.</p></div>
+      </div>
+    </div>
+  </div>
+  <div class="slide-number">08 / 11</div>
+</section>
+
+<!-- SLIDE 09: RISKS -->
+<section class="slide">
+  <div class="slide-content two">
+    <div class="grid">
+      <div class="kicker reveal">Risks</div>
+      <h2 class="reveal">A trust product has to be careful by design.</h2>
+      <p class="lead reveal">FakeOut reduces risk without pretending any system can be perfectly certain.</p>
+    </div>
+    <div class="matrix reveal">
+      <div class="card"><h3>Accuracy</h3><p>Risk bands and confidence levels prevent overconfidence. Outputs show evidence, not just verdicts. The product never claims binary true/false.</p></div>
+      <div class="card"><h3>Privacy + GDPR</h3><p>Private by default. User content is not stored or used for training. GDPR-compliant design from day one. Opt-in only for saved examples.</p></div>
+      <div class="card"><h3>Cost</h3><p>Text and link checks stay cheap. Expensive media checks are gated behind paid tiers to keep margins viable.</p></div>
+      <div class="card"><h3>Competition</h3><p>Win on workflow, local language support, plain-language explanation, and actionable next steps that enterprise tools skip.</p></div>
+    </div>
+  </div>
+  <div class="slide-number">09 / 11</div>
+</section>
+
+<!-- SLIDE 10: TEAM (NEW) -->
+<section class="slide">
+  <div class="slide-content">
+    <div class="grid">
+      <div class="kicker reveal">Team</div>
+      <h2 class="reveal">Built by someone who works on this problem every day.</h2>
+      <div class="split reveal">
+        <div class="card">
+          <h3>Founder</h3>
+          <p class="stat-note" style="margin-top:.6rem"><strong>Vatsal Mishra</strong>, Engineering Analyst at Google Trust &amp; Safety</p>
+          <ul>
+            <li>10+ years in tech, analytics, and data science</li>
+            <li>Google T&amp;S: reviewing and mitigating harmful content at scale</li>
+            <li>Direct domain experience in fraud patterns, misinformation, and policy enforcement</li>
+            <li>Self-taught builder with a track record of shipping products</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>Why this founder</h3>
+          <p class="stat-note" style="margin-top:.6rem">Fighting AI-driven fraud and synthetic media is not an abstract problem here. It is the day job. FakeOut brings institutional knowledge from one of the world's largest trust and safety operations to a product built for everyone else.</p>
+          <p class="stat-note" style="margin-top:.8rem">FakeOut applies that same pattern-recognition expertise to a product anyone can use.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="slide-number">10 / 11</div>
+</section>
+
+<!-- SLIDE 11: CLOSING -->
+<section class="slide">
+  <div class="slide-content">
+    <div class="final-box reveal">
+      <div class="kicker">Closing</div>
+      <p class="quote" style="margin-top:.8rem">FakeOut is becoming the place people go when the internet feels suspicious.</p>
+      <div class="rule"></div>
+      <div class="three">
+        <div><h3>What it is</h3><p class="stat-note">A digital safety platform for scams, misinformation, and AI-generated media. Consumer first, with a clear path to B2B.</p></div>
+        <div><h3>Traction</h3><p class="stat-note">16K+ downloads, 649 MAU, 52K+ AI checks run, users in 40+ countries, growing 8% per month.</p></div>
+        <div><h3>Business model</h3><p class="stat-note">Freemium tiers live today. Education packages and B2B API as the next revenue layer.</p></div>
+      </div>
+    </div>
+  </div>
+  <div class="slide-number">11 / 11</div>
+</section>
+
+<script>
+class SlideDeck{
+  constructor(){
+    this.slides=[...document.querySelectorAll('.slide')];
+    this.current=0;
+    this.lock=false;
+    this.dots=document.querySelector('#navDots');
+    this.progress=document.querySelector('#progress');
+    this.buildDots();
+    this.observe();
+    this.bindKeys();
+    this.bindTouch();
+    this.bindWheel();
+    document.querySelector('#prevBtn').addEventListener('click',()=>this.go(this.current-1));
+    document.querySelector('#nextBtn').addEventListener('click',()=>this.go(this.current+1));
+    this.update();
+    this.slides[0].classList.add('visible');
+  }
+  buildDots(){
+    this.dots.innerHTML='';
+    this.slides.forEach((_,i)=>{
+      const b=document.createElement('button');
+      b.type='button';
+      b.setAttribute('aria-label','Go to slide '+(i+1));
+      b.addEventListener('click',()=>this.go(i));
+      this.dots.appendChild(b);
+    });
+    this.dotButtons=[...this.dots.querySelectorAll('button')];
+  }
+  observe(){
+    const io=new IntersectionObserver(entries=>{
+      entries.forEach(entry=>{
+        if(entry.isIntersecting){
+          this.current=this.slides.indexOf(entry.target);
+          entry.target.classList.add('visible');
+          this.update();
+        }
+      });
+    },{threshold:.62});
+    this.slides.forEach(slide=>io.observe(slide));
+  }
+  go(index){
+    const next=Math.max(0,Math.min(this.slides.length-1,index));
+    this.slides[next].scrollIntoView({behavior:'smooth',block:'start'});
+    this.current=next;
+    this.update();
+  }
+  update(){
+    this.dotButtons.forEach((b,i)=>b.classList.toggle('active',i===this.current));
+    this.progress.style.width=((this.current+1)/this.slides.length*100)+'%';
+  }
+  bindKeys(){
+    addEventListener('keydown',e=>{
+      const next=['ArrowDown','ArrowRight','PageDown',' '].includes(e.key);
+      const prev=['ArrowUp','ArrowLeft','PageUp'].includes(e.key);
+      if(next||prev){e.preventDefault();this.go(this.current+(next?1:-1));}
+      if(e.key==='Home')this.go(0);
+      if(e.key==='End')this.go(this.slides.length-1);
+    });
+  }
+  bindTouch(){
+    let startY=0,startX=0;
+    addEventListener('touchstart',e=>{startY=e.changedTouches[0].clientY;startX=e.changedTouches[0].clientX},{passive:true});
+    addEventListener('touchend',e=>{
+      const dy=startY-e.changedTouches[0].clientY;
+      const dx=startX-e.changedTouches[0].clientX;
+      if(Math.abs(dy)>55&&Math.abs(dy)>Math.abs(dx))this.go(this.current+(dy>0?1:-1));
+    },{passive:true});
+  }
+  bindWheel(){
+    addEventListener('wheel',e=>{
+      if(Math.abs(e.deltaY)<35||this.lock)return;
+      this.lock=true;
+      this.go(this.current+(e.deltaY>0?1:-1));
+      setTimeout(()=>this.lock=false,650);
+    },{passive:true});
+  }
+}
+new SlideDeck();
+</script>
+</body>
+</html>
