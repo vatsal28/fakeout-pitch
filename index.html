@@ -82,6 +82,11 @@ h3{font-size:var(--h3);line-height:1.08;letter-spacing:-.018em}
 .matrix .card{min-height:170px}
 .revenue{display:grid;grid-template-columns:repeat(4,1fr);gap:var(--gap)}
 .revenue .card{border-top:5px solid var(--blue)}
+.loss-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--gap)}
+.loss-grid .card{border-top:5px solid var(--red)}
+.source-list{display:grid;grid-template-columns:1fr 1fr;gap:var(--gap)}
+.source-list .card p{font-size:var(--small)}
+.source-link{display:inline-block;margin-top:.55rem;font-size:var(--small);font-weight:800;color:var(--blue);word-break:break-word}
 .callout{background:var(--ink);color:#fff;border-radius:8px;padding:clamp(1rem,2vw,1.4rem);max-width:760px}
 .callout p{color:#f3f4f6;font-size:var(--body);line-height:1.36}
 .final-box{background:var(--panel);border:1px solid var(--line-dark);border-radius:8px;padding:clamp(1.2rem,3vw,2.4rem)}
@@ -92,7 +97,7 @@ h3{font-size:var(--h3);line-height:1.08;letter-spacing:-.018em}
 .visible .reveal:nth-child(3){transition-delay:.1s}
 .visible .reveal:nth-child(4){transition-delay:.15s}
 @media(max-width:900px){
-  .two,.three,.four,.split,.matrix,.revenue{grid-template-columns:1fr}
+  .two,.three,.four,.split,.matrix,.revenue,.loss-grid,.source-list{grid-template-columns:1fr}
   .product-flow{grid-template-columns:1fr}
   .flow-step{border-right:0;border-bottom:1px solid var(--line)}
   .flow-step:last-child{border-bottom:0}
@@ -164,7 +169,7 @@ h3{font-size:var(--h3);line-height:1.08;letter-spacing:-.018em}
       <div class="evidence-row"><strong class="yellow">27%</strong><p>Year-on-year growth in reported fraud losses. AI is making deception faster and cheaper.</p></div>
     </div>
   </div>
-  <div class="slide-number">01 / 12</div>
+  <div class="slide-number">01 / 14</div>
 </section>
 
 <!-- SLIDE 02: PIVOT -->
@@ -196,7 +201,7 @@ h3{font-size:var(--h3);line-height:1.08;letter-spacing:-.018em}
       </div>
     </div>
   </div>
-  <div class="slide-number">02 / 12</div>
+  <div class="slide-number">02 / 14</div>
 </section>
 
 <!-- SLIDE 03: WHY NOW -->
@@ -204,12 +209,12 @@ h3{font-size:var(--h3);line-height:1.08;letter-spacing:-.018em}
   <div class="slide-content">
     <div class="grid">
       <div class="kicker reveal">Why now</div>
-      <h2 class="reveal">The trust gap is widening, fast.</h2>
+      <h2 class="reveal">The cost of digital deception is already massive.</h2>
       <div class="three reveal">
         <div class="card">
           <div class="metric red">$15.9B</div>
           <p class="stat-note">US consumer fraud losses reported in 2025, up from $12.5B in 2024. The problem is accelerating.</p>
-          <p class="source">FTC / Statista, 2025</p>
+          <p class="source">FTC Consumer Sentinel, 2024; Statista, 2025</p>
         </div>
         <div class="card">
           <div class="metric blue">59%</div>
@@ -218,13 +223,45 @@ h3{font-size:var(--h3);line-height:1.08;letter-spacing:-.018em}
         </div>
         <div class="card">
           <div class="metric green">500M</div>
-          <p class="stat-note">AI images generated every day. Synthetic media is now the default weapon in fraud and manipulation campaigns.</p>
+          <p class="stat-note">AI images generated every day. Synthetic media gives scammers cheap, personalized deception at scale.</p>
           <p class="source">Everypixel Journal, 2023</p>
         </div>
       </div>
     </div>
   </div>
-  <div class="slide-number">03 / 12</div>
+  <div class="slide-number">03 / 14</div>
+</section>
+
+<!-- SLIDE 04: FINANCIAL GAP -->
+<section class="slide">
+  <div class="slide-content">
+    <div class="grid">
+      <div class="kicker reveal">The financial gap</div>
+      <h2 class="reveal">People and organizations are losing money before they know what to verify.</h2>
+      <div class="loss-grid reveal">
+        <div class="card">
+          <div class="metric red">$5.8B</div>
+          <p class="stat-note">Crypto investment fraud, including pig butchering, reported to the FBI in 2024.</p>
+          <p class="source">FBI IC3 2024 Internet Crime Report</p>
+          <a class="source-link" href="https://www.ic3.gov/AnnualReport/Reports/2024_IC3Report.pdf" target="_blank" rel="noopener">Source</a>
+        </div>
+        <div class="card">
+          <div class="metric blue">$5.7B</div>
+          <p class="stat-note">BEC and imposter scams reported across FBI and FTC datasets in 2024.</p>
+          <p class="source">FBI IC3 2024; FTC Consumer Sentinel 2024</p>
+          <a class="source-link" href="https://www.ftc.gov/system/files/ftc_gov/pdf/csn-annual-data-book-2024.pdf" target="_blank" rel="noopener">Source</a>
+        </div>
+        <div class="card">
+          <div class="metric green">$1.5B</div>
+          <p class="stat-note">Projected deepfake fraud losses for 2025, up from $359M documented in 2024.</p>
+          <p class="source">Surfshark Research, 2025</p>
+          <a class="source-link" href="https://surfshark.com/research/chart/deepfake-fraud-losses" target="_blank" rel="noopener">Source</a>
+        </div>
+      </div>
+      <div class="callout reveal"><p>FakeOut does not need to capture the whole fraud market. It sits at the decision point: before someone trusts a profile, pays a fake platform, opens a phishing link, shares a false claim, or believes manipulated media.</p></div>
+    </div>
+  </div>
+  <div class="slide-number">04 / 14</div>
 </section>
 
 <!-- SLIDE 04: TRACTION (NEW) -->
@@ -263,7 +300,7 @@ h3{font-size:var(--h3);line-height:1.08;letter-spacing:-.018em}
       </div>
     </div>
   </div>
-  <div class="slide-number">04 / 12</div>
+  <div class="slide-number">05 / 14</div>
 </section>
 
 <!-- SLIDE 05: MARKET GAP -->
@@ -281,7 +318,7 @@ h3{font-size:var(--h3);line-height:1.08;letter-spacing:-.018em}
       <div class="card"><h3>FakeOut opening</h3><p>One workflow for content, context, risk, and next action, designed for the person who just got a suspicious WhatsApp forward.</p></div>
     </div>
   </div>
-  <div class="slide-number">05 / 12</div>
+  <div class="slide-number">06 / 14</div>
 </section>
 
 <!-- SLIDE 06: PRODUCT -->
@@ -299,7 +336,7 @@ h3{font-size:var(--h3);line-height:1.08;letter-spacing:-.018em}
       <div class="callout reveal"><p>52K+ checks performed and 2,500+ image scans completed. Unified media scoring and per-segment video timelines are live. The platform layer is next.</p></div>
     </div>
   </div>
-  <div class="slide-number">06 / 12</div>
+  <div class="slide-number">07 / 14</div>
 </section>
 
 <!-- SLIDE 07: GROWTH PATH -->
@@ -317,7 +354,7 @@ h3{font-size:var(--h3);line-height:1.08;letter-spacing:-.018em}
       <div class="callout reveal"><p>Near-term milestone: 5,000 monthly active users and a live Trust Assistant beta by Q3 2026. Currently at ~2K MAU, growing 8% month over month.</p></div>
     </div>
   </div>
-  <div class="slide-number">07 / 12</div>
+  <div class="slide-number">08 / 14</div>
 </section>
 
 <!-- SLIDE 08: REVENUE -->
@@ -334,7 +371,7 @@ h3{font-size:var(--h3);line-height:1.08;letter-spacing:-.018em}
       </div>
     </div>
   </div>
-  <div class="slide-number">08 / 12</div>
+  <div class="slide-number">09 / 14</div>
 </section>
 
 <!-- SLIDE 09: RISKS -->
@@ -352,7 +389,7 @@ h3{font-size:var(--h3);line-height:1.08;letter-spacing:-.018em}
       <div class="card"><h3>Competition</h3><p>Win on workflow, local language support, per-segment video timelines, plain-language explanation, and actionable next steps that enterprise tools skip.</p></div>
     </div>
   </div>
-  <div class="slide-number">09 / 12</div>
+  <div class="slide-number">10 / 14</div>
 </section>
 
 <!-- SLIDE 10: TEAM (NEW) -->
@@ -380,7 +417,7 @@ h3{font-size:var(--h3);line-height:1.08;letter-spacing:-.018em}
       </div>
     </div>
   </div>
-  <div class="slide-number">10 / 12</div>
+  <div class="slide-number">11 / 14</div>
 </section>
 
 <!-- SLIDE 11: 90-DAY PLAN (NEW) -->
@@ -424,7 +461,44 @@ h3{font-size:var(--h3);line-height:1.08;letter-spacing:-.018em}
       <div class="callout reveal"><p>Day 90 decision: if combined MRR is below $2K, go education-first. If D7 retention exceeds 15% and upgrade CTR exceeds 5%, invest in consumer growth.</p></div>
     </div>
   </div>
-  <div class="slide-number">11 / 12</div>
+  <div class="slide-number">12 / 14</div>
+</section>
+
+<!-- SLIDE 13: SOURCES -->
+<section class="slide">
+  <div class="slide-content">
+    <div class="grid">
+      <div class="kicker reveal">Sources</div>
+      <h2 class="reveal">The loss story is grounded in public fraud and market data.</h2>
+      <div class="source-list reveal">
+        <div class="card">
+          <h3>Consumer fraud and cybercrime</h3>
+          <p class="stat-note">FTC Consumer Sentinel 2024, FBI IC3 2024, CFTC romance fraud guidance.</p>
+          <a class="source-link" href="https://www.ftc.gov/system/files/ftc_gov/pdf/csn-annual-data-book-2024.pdf" target="_blank" rel="noopener">FTC data book</a>
+          <a class="source-link" href="https://www.ic3.gov/AnnualReport/Reports/2024_IC3Report.pdf" target="_blank" rel="noopener">FBI IC3 report</a>
+        </div>
+        <div class="card">
+          <h3>Deepfakes and AI fraud</h3>
+          <p class="stat-note">Surfshark deepfake fraud losses, Deloitte genAI fraud projection, Sumsub identity fraud report.</p>
+          <a class="source-link" href="https://surfshark.com/research/chart/deepfake-fraud-losses" target="_blank" rel="noopener">Surfshark research</a>
+          <a class="source-link" href="https://www.deloitte.com/us/en/insights/industry/financial-services/deepfake-banking-fraud-risk-on-the-rise.html" target="_blank" rel="noopener">Deloitte projection</a>
+        </div>
+        <div class="card">
+          <h3>Misinformation and market harm</h3>
+          <p class="stat-note">WEF reporting on disinformation risk and economic impact estimates.</p>
+          <a class="source-link" href="https://www.weforum.org/stories/2025/07/financial-impact-of-disinformation-on-corporations/" target="_blank" rel="noopener">WEF economic impact</a>
+        </div>
+        <div class="card">
+          <h3>Fake reviews, counterfeit, and ad fraud</h3>
+          <p class="stat-note">Capital One Shopping fake review research, NBER fake review paper, Juniper invalid traffic estimate.</p>
+          <a class="source-link" href="https://capitaloneshopping.com/research/fake-review-statistics/" target="_blank" rel="noopener">Fake review stats</a>
+          <a class="source-link" href="https://www.nber.org/papers/w31836" target="_blank" rel="noopener">NBER paper</a>
+        </div>
+      </div>
+      <div class="callout reveal"><p>Use the large market numbers as context, not as a claim that FakeOut captures all losses. The defensible claim is narrower: FakeOut reduces risk at the moment a person decides whether to trust something online.</p></div>
+    </div>
+  </div>
+  <div class="slide-number">13 / 14</div>
 </section>
 
 <!-- SLIDE 12: CLOSING -->
@@ -441,7 +515,7 @@ h3{font-size:var(--h3);line-height:1.08;letter-spacing:-.018em}
       </div>
     </div>
   </div>
-  <div class="slide-number">12 / 12</div>
+  <div class="slide-number">14 / 14</div>
 </section>
 
 <script>
